@@ -38,12 +38,14 @@ Every employee has a field (FK) which has a id of voted menu or None.
 Every menu has a votes (IntField).
 
 That 2 fields are setting to 0 everyday at midnight by celery. You can change it in config/settings.py
+```
     CELERY_BEAT_SCHEDULE = {
         "sample_task": {
             "task": "menus.tasks.pruner",
             "schedule": crontab(minute=0, hour=0),
         },
     }
+```    
 
 New day - new voting.
    
