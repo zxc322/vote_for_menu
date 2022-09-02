@@ -24,3 +24,7 @@ That 2 fields are setting to 0 everyday at midnight by celery.
 
 New day - new voting.
    
+Since you start running app you can find urls documentation at 
+        http://localhost/api/v2/swagger/
+
+      
