@@ -1,0 +1,25 @@
+django-timezone-field==4.1.0
+django-celery-beat==2.2.1
+pyjwt==v1.7.1
+celery==5.1.2
+drf-yasg==1.21.3
+
+Django==3.2.15
+django-filter==2.4.0
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+Pillow==9.1.1
+psycopg2-binary==2.9.3
+pycodestyle==2.8.0
+python-dateutil==2.8.2
+pytz==2022.1
+six==1.16.0
+sqlparse==0.4.2
+toml==0.10.2
+urllib3==1.26.9
+
+
+django-redis==5.2.0
+djangorestframework==3.13.1
+djangorestframework-simplejwt==4.4.0
+-e git+https://github.com/celery/django-celery-results.git@ed94080cea3d68a38f9ff048657a37b08e74fc35#egg=django_celery_results

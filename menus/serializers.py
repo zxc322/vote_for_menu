@@ -5,28 +5,18 @@ from .services import get_current_day_as_str
 
 
 class CRUDMenuSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Menus
 
-        exclude = ['restaurant']
+        exclude = ['votes']
 
 
 class CurrentDayMenusSerializer(serializers.ModelSerializer):
-
     restaurant = serializers.ReadOnlyField(source='restaurant.name')
 
     class Meta:
         model = Menus
 
-        fields = ['restaurant', 'name', get_current_day_as_str()]
+        fields = ['id', 'restaurant', 'name', 'slug', 'votes', get_current_day_as_str()]
 
 
-class WinnersSerializer(serializers.ModelSerializer):
-
-    restaurant = serializers.ReadOnlyField(source='restaurant.name')
-
-    class Meta:
-        model = Menus
-
-        fields = ['restaurant', 'name', 'votes', get_current_day_as_str()]

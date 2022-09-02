@@ -2,12 +2,13 @@ from rest_framework import views, response, permissions
 
 from .models import ExtendedUser
 from menus.models import Menus
+from custom import my_permissions
 
 
 class AddChangeVoteMenuView(views.APIView):
     """ Add vote and change menu votes quantity """
 
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [my_permissions.IsEmployee]
 
     def post(self, request, pk):
         try:
@@ -15,10 +16,21 @@ class AddChangeVoteMenuView(views.APIView):
         except Menus.DoesNotExist:
             return response.Response(status=404)
 
+        # If user haven't voted yet
+
         if not request.user.voted_menu:
+            print('print only 0')
             ExtendedUser.objects.filter(id=request.user.id).update(voted_menu=pk)
             chosen_menu.votes += 1
             chosen_menu.save()
+
+        # If user have voted for this menu already
+
+        elif request.user.voted_menu.id == pk:
+            return response.Response(status=200)
+
+        # If user have voted for another menu already
+
         else:
             previous_menu = ExtendedUser.objects.get(pk=request.user.id).voted_menu
             previous_menu.votes -= 1
@@ -28,22 +40,3 @@ class AddChangeVoteMenuView(views.APIView):
             chosen_menu.votes += 1
             chosen_menu.save()
         return response.Response(status=201)
-
-
-class PruneView(views.APIView):
-
-    def post(self):
-        users = ExtendedUser.objects.all()
-        menus = Menus.objects.all()
-
-        for user in users:
-            user.voted_menu = None
-            user.save()
-            print('User PRUNED')
-
-        for menu in menus:
-            menu.votes = 0
-            menu.save()
-            print('Menus PRUNED')
-
-        return response.Response(status=204)

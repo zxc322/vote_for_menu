@@ -3,17 +3,10 @@ from rest_framework import serializers
 from .models import ExtendedUser
 
 
-
-
-
-
 class CreateEmployeeSerializer(serializers.ModelSerializer):
-    
-    
-
     class Meta:
         model = ExtendedUser
-        fields = [          
+        fields = [
             'username',
             'password',
             'email',
