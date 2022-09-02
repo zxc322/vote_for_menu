@@ -16,7 +16,7 @@ Only restorators can create restaurants and only restaurant creator can create/u
 
 Only employees can make a vote for a menu.
 
-Every employee has a field (FK) witch has a id of voted menu or None.
+Every employee has a field (FK) which has a id of voted menu or None.
 
 Every menu has a votes (IntField).
 
